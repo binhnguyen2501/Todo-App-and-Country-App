@@ -83,7 +83,7 @@ const CountryListApp: React.FC = () => {
       <div className="text-center my-6 text-[#EF4638] text-4xl font-extrabold">
         Country list
       </div>
-      <div className="w-1/2 my-0 mx-auto">
+      <div className="my-0 mx-auto w-11/12 lg:w-1/2">
         <div className="flex justify-center w-full">
           <div className="border-[1px] border-[#EFEFEF] rounded-lg w-full flex">
             <input
@@ -92,7 +92,7 @@ const CountryListApp: React.FC = () => {
               value={search}
               placeholder="Name..."
               onChange={handleChange}
-              className="w-full text-xl pl-6 py-3 border-0 rounded-lg focus:outline-none"
+              className="w-full text-lg lg:text-xl pl-6 py-3 border-0 rounded-lg focus:outline-none"
             />
             {checkUserTyping && (
               <img src={"/images/arrow.svg"} alt="search" className="mr-5" />
@@ -101,10 +101,12 @@ const CountryListApp: React.FC = () => {
         </div>
         <div className="mt-4">
           {checkUserTyping && (
-            <div className="text-center text-2xl font-bold">Loading...</div>
+            <div className="text-center text-xl lg:text-2xl font-bold">
+              Loading...
+            </div>
           )}
           {error && !checkUserTyping && (
-            <div className="text-center text-2xl font-bold">
+            <div className="text-center text-xl lg:text-2xl font-bold">
               Unavailable Result
             </div>
           )}

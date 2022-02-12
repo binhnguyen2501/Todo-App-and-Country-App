@@ -7,7 +7,7 @@ const HomePage: React.FC = () => {
       <div className="text-center my-6 text-[#EF4638] text-4xl font-extrabold">
         <div>Eastplayers Test</div>
       </div>
-      <div className="w-1/2 my-0 mx-auto flex flex-col gap-5">
+      <div className="my-0 mx-auto flex flex-col gap-5 w-11/12 lg:w-1/2">
         <div className="p-[12px] flex items-center gap-3 rounded-lg shadow-md">
           <div className="w-[38px] h-[38px] text-md text-[#EF4638] bg-red-100 text-center flex justify-center items-center rounded-full">
             1

@@ -50,7 +50,7 @@ const TodoApp: React.FC = () => {
       <div className="text-center my-6 text-[#EF4638] text-4xl font-extrabold">
         Todo list
       </div>
-      <div className="w-1/2 my-0 mx-auto">
+      <div className="my-0 mx-auto w-11/12 lg:w-1/2">
         <div className="flex justify-center w-full">
           <div className="border-[1px] border-[#EFEFEF] rounded-lg w-full flex">
             <input
@@ -59,24 +59,24 @@ const TodoApp: React.FC = () => {
               value={task}
               placeholder="Task..."
               onChange={handleChange}
-              className="w-full text-xl pl-6 py-3 border-0 rounded-lg focus:outline-none"
+              className="w-full text-lg lg:text-xl pl-6 py-3 border-0 rounded-lg focus:outline-none"
             />
             <button
               disabled={!task}
               onClick={handleAddTask}
-              className="w-40 cursor-pointer text-[#EF4638] text-xl font-bold"
+              className="w-40 cursor-pointer text-[#EF4638] text-lg lg:text-xl font-bold"
             >
               Add
             </button>
           </div>
         </div>
         <div className="mt-4">
-          <div className="text-center text-2xl mb-2 font-bold">
+          <div className="text-center text-lg lg:text-2xl  mb-2 font-bold">
             There are{" "}
             <span className="text-[#EF4638]">{prevTodoList.length}</span> tasks
             left out of {todoList.length} tasks
           </div>
-          <ul className="list-disc">
+          <ul className="list-disc px-4">
             {todoList.map((task: TodoList, index: number) => {
               return (
                 <TodoTask

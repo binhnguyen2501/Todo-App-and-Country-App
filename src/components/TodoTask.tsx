@@ -14,7 +14,7 @@ const TodoTask = ({ task, completeTask }: Props) => {
       onClick={() => {
         completeTask(task.taskName);
       }}
-      className={`text-2xl cursor-pointer ${
+      className={`text-lg lg:text-2xl cursor-pointer ${
         task.isComplete ? "line-through" : ""
       }`}
     >
