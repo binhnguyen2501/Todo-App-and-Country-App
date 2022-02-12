@@ -7,6 +7,7 @@ interface TodoList {
 }
 
 const TODO_APP_STORAGE_KEY = "TODO_APP";
+const TODO_APP_TASK_DONE_STORAGE_KEY = "TODO_APP_TASK_DONE";
 
 const TodoApp: React.FC = () => {
   const [task, setTask] = useState<string>("");
@@ -15,14 +16,25 @@ const TodoApp: React.FC = () => {
 
   useEffect(() => {
     const storageTodoList: any = localStorage.getItem(TODO_APP_STORAGE_KEY);
-    if (storageTodoList) {
+    const storageTodoTaskDone: any = localStorage.getItem(
+      TODO_APP_TASK_DONE_STORAGE_KEY
+    );
+    if (storageTodoList && storageTodoTaskDone) {
       setTodoList(JSON.parse(storageTodoList));
+      setPrevTodoList(JSON.parse(storageTodoTaskDone));
     }
   }, []);
 
   useEffect(() => {
     localStorage.setItem(TODO_APP_STORAGE_KEY, JSON.stringify(todoList));
   }, [todoList]);
+
+  useEffect(() => {
+    localStorage.setItem(
+      TODO_APP_TASK_DONE_STORAGE_KEY,
+      JSON.stringify(prevTodoList)
+    );
+  }, [prevTodoList]);
 
   const handleChange = useCallback(
     (event: React.ChangeEvent<HTMLInputElement>): void => {
