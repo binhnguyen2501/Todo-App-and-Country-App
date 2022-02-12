@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback, useEffect } from "react";
 import TodoTask from "../components/TodoTask";
 
 interface TodoList {
@@ -6,10 +6,23 @@ interface TodoList {
   isComplete: boolean;
 }
 
+const TODO_APP_STORAGE_KEY = "TODO_APP";
+
 const TodoApp: React.FC = () => {
   const [task, setTask] = useState<string>("");
   const [todoList, setTodoList] = useState<TodoList[]>([]);
   const [prevTodoList, setPrevTodoList] = useState<TodoList[]>([]);
+
+  useEffect(() => {
+    const storageTodoList: any = localStorage.getItem(TODO_APP_STORAGE_KEY);
+    if (storageTodoList) {
+      setTodoList(JSON.parse(storageTodoList));
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem(TODO_APP_STORAGE_KEY, JSON.stringify(todoList));
+  }, [todoList]);
 
   const handleChange = useCallback(
     (event: React.ChangeEvent<HTMLInputElement>): void => {
