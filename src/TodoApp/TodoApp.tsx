@@ -7,7 +7,7 @@ interface TodoList {
 }
 
 const TODO_APP_STORAGE_KEY = "TODO_APP";
-const TODO_APP_TASK_DONE_STORAGE_KEY = "TODO_APP_TASK_DONE";
+const TODO_APP_TASK_DONE_STORAGE_KEY = "TODO_APP_TASK_NOT_DONE";
 
 const TodoApp: React.FC = () => {
   const [task, setTask] = useState<string>("");
