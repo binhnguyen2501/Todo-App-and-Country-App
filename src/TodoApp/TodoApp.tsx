@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import TodoTask from "../components/TodoTask";
 
 interface TodoList {
@@ -36,22 +36,19 @@ const TodoApp: React.FC = () => {
     );
   }, [prevTodoList]);
 
-  const handleChange = useCallback(
-    (event: React.ChangeEvent<HTMLInputElement>): void => {
-      if (event.target.name === "task") {
-        setTask(event.target.value);
-      }
-      // ready to get another input element just with 1 function handler that
-    },
-    []
-  );
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
+    if (event.target.name === "task") {
+      setTask(event.target.value);
+    }
+    // ready to get another input element just with 1 function handler that
+  };
 
-  const handleAddTask = useCallback((): void => {
+  const handleAddTask = (): void => {
     const newTask = { taskName: task, isComplete: false };
     setTodoList([...todoList, newTask]);
     setPrevTodoList([...prevTodoList, newTask]);
     setTask("");
-  }, [task, todoList, prevTodoList]);
+  };
 
   const handleCompleteTask = (taskNameComplete: string): void => {
     // show how many task was complete from all tasks
