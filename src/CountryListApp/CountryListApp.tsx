@@ -7,7 +7,6 @@ interface CountryList {
 }
 
 const CountryListApp: React.FC = () => {
-  const [search, setSearch] = useState<string>("");
   const [countryList, setCountryList] = useState<CountryList[]>([]);
   const [error, setError] = useState<boolean>(false);
   const [checkUserTyping, setCheckUserTyping] = useState<boolean>(false);
@@ -64,7 +63,6 @@ const CountryListApp: React.FC = () => {
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
     const value = event.target.value;
-    setSearch(value);
 
     if (typingTimeoutRef.current) {
       clearTimeout(typingTimeoutRef.current);
