@@ -31,7 +31,7 @@ const CountryListApp: React.FC = () => {
       setCheckUserTyping(true);
       try {
         const response = await axios.get(
-          `https://restcountries.com/v3.1/name/${search}`
+          `https://restcountries.com/v3.1/name/${searchValue}`
         );
         const countriesResponse = response.data.map((item: any) => {
           return { countryName: item.name.common };
@@ -89,7 +89,6 @@ const CountryListApp: React.FC = () => {
             <input
               type="text"
               name="search"
-              value={search}
               placeholder="Name..."
               onChange={handleChange}
               className="w-full text-lg lg:text-xl pl-6 py-3 border-0 rounded-lg focus:outline-none"
