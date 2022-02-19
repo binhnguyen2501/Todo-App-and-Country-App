@@ -12,7 +12,7 @@ const ConfirmModal = ({ closeModal, isConfirmAdd }: Props) => {
   };
   return (
     <div className="bg-black bg-opacity-50 absolute inset-0 flex justify-center items-center">
-      <div className="bg-gray-200 max-w-sm py-2 px-3 rounded-lg shadow-xl text-gray-800">
+      <div className="bg-white max-w-sm py-2 px-3 rounded-lg shadow-xl text-gray-800">
         <div className="flex justify-between items-center">
           <h4 className="text-lg font-bold">Confirm</h4>
           <div onClick={() => closeModal(false)}>
