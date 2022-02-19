@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import TodoTask from "../components/TodoTask";
+import ConfirmModal from "../components/ConfirmModal";
 
 interface TodoList {
   taskName: string;
@@ -13,6 +14,7 @@ const TodoApp: React.FC = () => {
   const [task, setTask] = useState<string>("");
   const [todoList, setTodoList] = useState<TodoList[]>([]);
   const [prevTodoList, setPrevTodoList] = useState<TodoList[]>([]);
+  const [openModalConfirm, setOpenModalConfirm] = useState<boolean>(false);
 
   useEffect(() => {
     const storageTodoList: any = localStorage.getItem(TODO_APP_STORAGE_KEY);
@@ -45,9 +47,29 @@ const TodoApp: React.FC = () => {
 
   const handleAddTask = (): void => {
     const newTask = { taskName: task, isComplete: false };
-    setTodoList([...todoList, newTask]);
-    setPrevTodoList([...prevTodoList, newTask]);
-    setTask("");
+    if (todoList.length !== 0) {
+      const duplicateTask = todoList.find((item) => item.taskName === task);
+      if (duplicateTask) {
+        setOpenModalConfirm(true);
+      } else {
+        setTodoList([...todoList, newTask]);
+        setPrevTodoList([...prevTodoList, newTask]);
+        setTask("");
+      }
+    } else {
+      setTodoList([...todoList, newTask]);
+      setPrevTodoList([...prevTodoList, newTask]);
+      setTask("");
+    }
+  };
+
+  const isConfirmAdd = (confirm: boolean): void => {
+    const newTask = { taskName: task, isComplete: false };
+    if (confirm) {
+      setTodoList([...todoList, newTask]);
+      setPrevTodoList([...prevTodoList, newTask]);
+      setTask("");
+    }
   };
 
   const handleCompleteTask = (taskNameComplete: string): void => {
@@ -111,6 +133,12 @@ const TodoApp: React.FC = () => {
           </ul>
         </div>
       </div>
+      {openModalConfirm && (
+        <ConfirmModal
+          closeModal={setOpenModalConfirm}
+          isConfirmAdd={isConfirmAdd}
+        />
+      )}
     </>
   );
 };
