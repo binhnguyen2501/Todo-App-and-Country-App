@@ -21,7 +21,7 @@ const HomePage: React.FC = () => {
             2
           </div>
           <Link
-            to="/CountryListApp"
+            to="/CountriesListApp"
             className="font-bold text-[#636271] text-md"
           >
             Country list

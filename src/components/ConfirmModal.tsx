@@ -1,5 +1,3 @@
-import React from "react";
-
 interface Props {
   closeModal(close: boolean): void;
   isConfirmAdd(confirm: boolean): void;

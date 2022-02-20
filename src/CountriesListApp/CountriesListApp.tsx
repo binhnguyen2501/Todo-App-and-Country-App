@@ -1,28 +1,30 @@
 import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import CountriesName from "../components/CountriesName";
+import { Link } from "react-router-dom";
 
-interface CountryList {
+interface CountryListTypes {
   countryName: string;
+  capital: string;
 }
 
-const CountryListApp: React.FC = () => {
-  const [countryList, setCountryList] = useState<CountryList[]>([]);
+const CountriesListApp: React.FC = () => {
+  const [countryList, setCountryList] = useState<CountryListTypes[]>([]);
   const [error, setError] = useState<boolean>(false);
   const [checkUserTyping, setCheckUserTyping] = useState<boolean>(false);
   const typingTimeoutRef: any = useRef();
 
   useEffect(() => {
     setCheckUserTyping(true);
-    const getCountryList = async () => {
+    const getCountriesList = async () => {
       const response = await axios.get(`https://restcountries.com/v3.1/all`);
       const countriesResponse = response.data.map((item: any) => {
-        return { countryName: item.name.common };
+        return { countryName: item.name.common, capital: item.capital };
       });
       setCountryList(countriesResponse);
       setCheckUserTyping(false);
     };
-    getCountryList();
+    getCountriesList();
   }, []);
 
   const handleSearchCountry = async (searchValue: string) => {
@@ -33,7 +35,7 @@ const CountryListApp: React.FC = () => {
           `https://restcountries.com/v3.1/name/${searchValue}`
         );
         const countriesResponse = response.data.map((item: any) => {
-          return { countryName: item.name.common };
+          return { countryName: item.name.common, capital: item.capital };
         });
         setCheckUserTyping(false);
         setCountryList(countriesResponse);
@@ -48,7 +50,7 @@ const CountryListApp: React.FC = () => {
       try {
         const response = await axios.get(`https://restcountries.com/v3.1/all`);
         const countriesResponse = response.data.map((item: any) => {
-          return { countryName: item.name.common };
+          return { countryName: item.name.common, capital: item.capital };
         });
         setCheckUserTyping(false);
         setCountryList(countriesResponse);
@@ -79,7 +81,7 @@ const CountryListApp: React.FC = () => {
   return (
     <>
       <div className="text-center my-6 text-[#EF4638] text-4xl font-extrabold">
-        Country list
+        Where in the world?
       </div>
       <div className="my-0 mx-auto w-11/12 lg:w-1/2">
         <div className="flex justify-center w-full">
@@ -109,13 +111,15 @@ const CountryListApp: React.FC = () => {
           )}
           {!error &&
             !checkUserTyping &&
-            countryList.map((country: CountryList, index: number) => {
-              return <CountriesName key={index} country={country} />;
-            })}
+            countryList.map((country: CountryListTypes, index: number) => (
+              <Link to={`/CountriesListApp/${country.capital}`} key={index}>
+                <CountriesName country={country} />
+              </Link>
+            ))}
         </div>
       </div>
     </>
   );
 };
 
-export default CountryListApp;
+export default CountriesListApp;
