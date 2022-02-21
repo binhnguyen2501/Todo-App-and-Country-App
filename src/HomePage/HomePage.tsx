@@ -13,7 +13,7 @@ const HomePage: React.FC = () => {
             1
           </div>
           <Link to="/TodoApp" className="font-bold text-[#636271] text-md">
-            Todo list
+            What's the Plan for Today?
           </Link>
         </div>
         <div className="p-[12px] flex items-center gap-3 rounded-lg shadow-md">
@@ -24,7 +24,7 @@ const HomePage: React.FC = () => {
             to="/CountriesListApp"
             className="font-bold text-[#636271] text-md"
           >
-            Country list
+            Where in the world?
           </Link>
         </div>
       </div>

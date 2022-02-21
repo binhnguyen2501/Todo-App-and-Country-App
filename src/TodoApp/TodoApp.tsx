@@ -92,7 +92,7 @@ const TodoApp: React.FC = () => {
   return (
     <>
       <div className="text-center my-6 text-[#EF4638] text-4xl font-extrabold">
-        Todo list
+        What's the Plan for Today?
       </div>
       <div className="my-0 mx-auto w-11/12 lg:w-1/2">
         <div className="flex justify-center w-full">
