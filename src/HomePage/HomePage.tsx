@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
 
 const HomePage: React.FC = () => {
   return (
@@ -8,25 +9,32 @@ const HomePage: React.FC = () => {
         <div>Eastplayers Test</div>
       </div>
       <div className="my-0 mx-auto flex flex-col gap-5 w-11/12 lg:w-1/2">
-        <div className="p-[12px] flex items-center gap-3 rounded-lg shadow-md">
-          <div className="w-[38px] h-[38px] text-md text-[#EF4638] bg-red-100 text-center flex justify-center items-center rounded-full">
-            1
-          </div>
-          <Link to="/TodoApp" className="font-bold text-[#636271] text-md">
-            What's the Plan for Today?
+        <motion.div whileHover={{ scale: 1.1 }}>
+          <Link
+            to="/TodoApp"
+            className="p-[12px] flex items-center gap-3 rounded-lg shadow-md"
+          >
+            <div className="w-[38px] h-[38px] text-md text-[#EF4638] bg-red-100 text-center flex justify-center items-center rounded-full">
+              1
+            </div>
+            <div className="font-bold text-[#636271] text-md">
+              What's the Plan for Today?
+            </div>
           </Link>
-        </div>
-        <div className="p-[12px] flex items-center gap-3 rounded-lg shadow-md">
-          <div className="w-[38px] h-[38px] text-md text-[#EF4638] bg-red-100 text-center flex justify-center items-center rounded-full">
-            2
-          </div>
+        </motion.div>
+        <motion.div whileHover={{ scale: 1.1 }}>
           <Link
             to="/CountriesListApp"
-            className="font-bold text-[#636271] text-md"
+            className="p-[12px] flex items-center gap-3 rounded-lg shadow-md"
           >
-            Where in the world?
+            <div className="w-[38px] h-[38px] text-md text-[#EF4638] bg-red-100 text-center flex justify-center items-center rounded-full">
+              2
+            </div>
+            <div className="font-bold text-[#636271] text-md">
+              Where in the world?
+            </div>
           </Link>
-        </div>
+        </motion.div>
       </div>
     </>
   );

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import TodoTask from "../components/TodoTask";
 import ConfirmModal from "../components/ConfirmModal";
+import { AnimatePresence } from "framer-motion";
 
 interface TodoList {
   taskName: string;
@@ -133,12 +134,20 @@ const TodoApp: React.FC = () => {
           </ul>
         </div>
       </div>
-      {openModalConfirm && (
-        <ConfirmModal
-          closeModal={setOpenModalConfirm}
-          isConfirmAdd={isConfirmAdd}
-        />
-      )}
+      <AnimatePresence
+        //Disable any initial animations on children that are present when the component is first rendered
+        initial={false}
+        //Only render one component at a time
+        //The exiting component will finish its exit animation before entering component is rendered
+        exitBeforeEnter={true}
+      >
+        {openModalConfirm && (
+          <ConfirmModal
+            closeModal={setOpenModalConfirm}
+            isConfirmAdd={isConfirmAdd}
+          />
+        )}
+      </AnimatePresence>
     </>
   );
 };

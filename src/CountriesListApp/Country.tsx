@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Link, useParams } from "react-router-dom";
 import GoogleMaps from "../components/GoogleMaps";
+import { motion } from "framer-motion";
 
 interface CountryTypes {
   countryName: string;
@@ -57,11 +58,14 @@ const Country: React.FC = () => {
 
   return (
     <div className="xl:py-10 xl:px-14 p-6 min-h-screen bg-slate-100">
-      <Link
-        to={"/CountriesListApp"}
-        className="bg-[#EF4638] pt-2 pb-3 pl-4 pr-6 rounded shadow text-white font-bold tracking-wide"
-      >
-        &larr; Back
+      <Link to={"/CountriesListApp"}>
+        <motion.button
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.9 }}
+          className="bg-[#EF4638] pt-2 pb-3 pl-4 pr-6 rounded shadow text-white font-bold tracking-wide"
+        >
+          &larr; Back
+        </motion.button>
       </Link>
       <div className="mt-10">
         {isLoading && (

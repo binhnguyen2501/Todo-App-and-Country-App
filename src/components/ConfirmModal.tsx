@@ -1,7 +1,31 @@
+import { motion } from "framer-motion";
+import Overlay from "./Overlay";
+
 interface Props {
   closeModal(close: boolean): void;
   isConfirmAdd(confirm: boolean): void;
 }
+
+const dropIn = {
+  hidden: {
+    y: "-100vh",
+    opacity: 0,
+  },
+  visible: {
+    y: "0",
+    opacity: 1,
+    transition: {
+      duration: 0.1,
+      type: "spring",
+      damping: 25,
+      stiffness: 500,
+    },
+  },
+  exit: {
+    y: "100vh",
+    opacity: 0,
+  },
+};
 
 const ConfirmModal = ({ closeModal, isConfirmAdd }: Props) => {
   const handleConfirm = (): void => {
@@ -9,8 +33,16 @@ const ConfirmModal = ({ closeModal, isConfirmAdd }: Props) => {
     isConfirmAdd(true);
   };
   return (
-    <div className="bg-black bg-opacity-50 absolute inset-0 flex justify-center items-center">
-      <div className="bg-white max-w-sm py-2 px-3 rounded-lg shadow-xl text-gray-800">
+    <Overlay>
+      <motion.div
+        onClick={(e) => e.stopPropagation()}
+        style={{ width: "clamp(350px, 50%, 400px)", height: "min(50%, 140px)" }}
+        className="bg-white py-2 px-3 rounded-lg shadow-xl text-gray-800"
+        variants={dropIn}
+        initial="hidden"
+        animate="visible"
+        exit="exit"
+      >
         <div className="flex justify-between items-center">
           <h4 className="text-lg font-bold">Confirm</h4>
           <div onClick={() => closeModal(false)}>
@@ -35,21 +67,25 @@ const ConfirmModal = ({ closeModal, isConfirmAdd }: Props) => {
           </p>
         </div>
         <div className="mt-3 flex justify-end space-x-3">
-          <button
+          <motion.button
             className="px-3 py-1 hover:text-red-900 hover:bg-red-300 hover:bg-opacity-50 rounded-lg"
             onClick={() => closeModal(false)}
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.9 }}
           >
             Cancel
-          </button>
-          <button
+          </motion.button>
+          <motion.button
             className="px-3 py-1 bg-[#EF4638] hover:bg-red-600 text-gray-200 rounded-lg"
             onClick={handleConfirm}
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.9 }}
           >
             Add
-          </button>
+          </motion.button>
         </div>
-      </div>
-    </div>
+      </motion.div>
+    </Overlay>
   );
 };
 
