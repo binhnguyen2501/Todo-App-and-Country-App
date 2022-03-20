@@ -6,7 +6,7 @@ const HomePage: React.FC = () => {
   return (
     <>
       <div className="text-center my-6 text-[#EF4638] text-4xl font-extrabold">
-        <div>Eastplayers Test</div>
+        <div>Utility Applications</div>
       </div>
       <div className="my-0 mx-auto flex flex-col gap-5 w-11/12 lg:w-1/2">
         <motion.div whileHover={{ scale: 1.1 }}>
