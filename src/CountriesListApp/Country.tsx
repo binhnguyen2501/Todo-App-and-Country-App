@@ -61,8 +61,8 @@ const Country: React.FC = () => {
     <div className="xl:py-10 xl:px-14 p-6 min-h-screen bg-slate-100">
       <Link to={"/CountriesListApp"}>
         <motion.button
-          whileHover={{ scale: 1.1 }}
-          whileTap={{ scale: 0.9 }}
+          whileHover={{ scale: 1.01 }}
+          whileTap={{ scale: 0.99 }}
           className="bg-[#EF4638] pt-2 pb-3 pl-4 pr-6 rounded shadow text-white font-bold tracking-wide"
         >
           &larr; Back

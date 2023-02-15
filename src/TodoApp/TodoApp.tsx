@@ -20,6 +20,7 @@ const TodoApp: React.FC = () => {
   const [todoList, setTodoList] = useState<TodoList[]>([]);
   const [prevTodoList, setPrevTodoList] = useState<TodoList[]>([]);
   const [openModalConfirm, setOpenModalConfirm] = useState<boolean>(false);
+  const [selectedTaskEdit, setSelectedTaskEdit] = useState<string>("");
 
   useEffect(() => {
     const storageTodoList: any = localStorage.getItem(TODO_APP_STORAGE_KEY);
@@ -60,13 +61,13 @@ const TodoApp: React.FC = () => {
         setTodoList([...todoList, newTask]);
         setPrevTodoList([...prevTodoList, newTask]);
         setTask("");
-        toast.success("Successfully created task!");
+        toast.success(`Successfully created ${task} task!`);
       }
     } else {
       setTodoList([...todoList, newTask]);
       setPrevTodoList([...prevTodoList, newTask]);
       setTask("");
-      toast.success("Successfully created task!");
+      toast.success(`Successfully created ${task} task!`);
     }
   };
 
@@ -76,6 +77,7 @@ const TodoApp: React.FC = () => {
       setTodoList([...todoList, newTask]);
       setPrevTodoList([...prevTodoList, newTask]);
       setTask("");
+      toast.success(`Successfully created ${task} task!`);
     }
   };
 
@@ -92,6 +94,29 @@ const TodoApp: React.FC = () => {
         todo.id === taskNameComplete ? { ...todo, isComplete: true } : todo
       )
     );
+  };
+
+  const handleDeleteTask = (taskDelete: string): void => {
+    const filterTodoList = todoList.filter((task) => task.id !== taskDelete);
+    setTodoList(filterTodoList);
+    const filterPrevTodoList = prevTodoList.filter(
+      (task) => task.id !== taskDelete
+    );
+    setPrevTodoList(filterPrevTodoList);
+  };
+
+  const handleEditTask = (taskEdit: string): void => {
+    const updateTodoList = todoList.map((item) => {
+      if (item.id === selectedTaskEdit) {
+        toast.success(`Task ${item.taskName} was changed!`);
+        return {
+          ...item,
+          taskName: taskEdit,
+        };
+      } else return item;
+    });
+    setTodoList(updateTodoList);
+    setSelectedTaskEdit("");
   };
 
   return (
@@ -125,13 +150,19 @@ const TodoApp: React.FC = () => {
             <span className="text-[#EF4638]">{prevTodoList.length}</span> tasks
             left out of {todoList.length} tasks
           </div>
-          <ul className="list-disc px-4">
+          <ul className="list-disc px-4 flex flex-col gap-1 mt-1">
             {todoList.map((task: TodoList, index: number) => {
               return (
                 <TodoTask
                   key={index}
                   task={task}
                   completeTask={handleCompleteTask}
+                  deleteTask={handleDeleteTask}
+                  selectedTaskEdit={selectedTaskEdit}
+                  handleSelectedTaskEdit={(taskEdit: string) =>
+                    setSelectedTaskEdit(taskEdit)
+                  }
+                  editTask={handleEditTask}
                 />
               );
             })}

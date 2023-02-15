@@ -9,7 +9,7 @@ const HomePage: React.FC = () => {
         <div>Utility Applications</div>
       </div>
       <div className="my-0 mx-auto flex flex-col gap-5 w-11/12 lg:w-1/2">
-        <motion.div whileHover={{ scale: 1.1 }}>
+        <motion.div whileHover={{ scale: 1.01 }}>
           <Link
             to="/TodoApp"
             className="p-[12px] flex items-center gap-3 rounded-lg shadow-md"
@@ -22,7 +22,7 @@ const HomePage: React.FC = () => {
             </div>
           </Link>
         </motion.div>
-        <motion.div whileHover={{ scale: 1.1 }}>
+        <motion.div whileHover={{ scale: 1.01 }}>
           <Link
             to="/CountriesListApp"
             className="p-[12px] flex items-center gap-3 rounded-lg shadow-md"

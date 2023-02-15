@@ -68,18 +68,18 @@ const ConfirmModal = ({ closeModal, isConfirmAdd }: Props) => {
         </div>
         <div className="mt-3 flex justify-end space-x-3">
           <motion.button
-            className="px-3 py-1 hover:text-red-900 hover:bg-red-300 hover:bg-opacity-50 rounded-lg"
+            className="px-3 py-1 hover:text-red-600 rounded-lg"
             onClick={() => closeModal(false)}
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.9 }}
+            whileHover={{ scale: 1.01 }}
+            whileTap={{ scale: 0.99 }}
           >
             Cancel
           </motion.button>
           <motion.button
-            className="px-3 py-1 bg-[#EF4638] hover:bg-red-600 text-gray-200 rounded-lg"
+            className="px-3 py-1 bg-[#EF4638] hover:bg-red-600 text-white rounded-lg"
             onClick={handleConfirm}
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.9 }}
+            whileHover={{ scale: 1.01 }}
+            whileTap={{ scale: 0.99 }}
           >
             Add
           </motion.button>
