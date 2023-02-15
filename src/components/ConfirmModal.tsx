@@ -8,7 +8,7 @@ interface Props {
 
 const dropIn = {
   hidden: {
-    y: "-100vh",
+    y: "-40px",
     opacity: 0,
   },
   visible: {
@@ -22,7 +22,7 @@ const dropIn = {
     },
   },
   exit: {
-    y: "100vh",
+    y: "40px",
     opacity: 0,
   },
 };

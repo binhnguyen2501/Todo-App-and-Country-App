@@ -1,7 +1,9 @@
 import React from "react";
+import toast from "react-hot-toast";
 
 interface Props {
   task: {
+    id: string;
     taskName: string;
     isComplete: boolean;
   };
@@ -12,9 +14,12 @@ const TodoTask = ({ task, completeTask }: Props) => {
   return (
     <li
       onClick={() => {
-        completeTask(task.taskName);
+        completeTask(task.id);
+        if (!task.isComplete) {
+          toast.success(`Task ${task.taskName} was completed!`);
+        }
       }}
-      className={`text-lg lg:text-2xl cursor-pointer ${
+      className={`text-lg lg:text-2xl cursor-pointer w-max ${
         task.isComplete ? "line-through" : ""
       }`}
     >

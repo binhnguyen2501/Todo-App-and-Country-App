@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useRef } from "react";
-import axios from "axios";
-import CountriesName from "../components/CountriesName";
 import { Link } from "react-router-dom";
+import axios from "axios";
+
+import CountriesName from "../components/CountriesName";
 
 interface CountryListTypes {
   countryName: string;
@@ -79,7 +80,7 @@ const CountriesListApp: React.FC = () => {
   }, [typingTimeoutRef.current]);
 
   return (
-    <>
+    <React.Fragment>
       <div className="text-center my-6 text-[#EF4638] text-4xl font-extrabold">
         Where in the world?
       </div>
@@ -118,7 +119,7 @@ const CountriesListApp: React.FC = () => {
             ))}
         </div>
       </div>
-    </>
+    </React.Fragment>
   );
 };
 

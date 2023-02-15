@@ -1,9 +1,13 @@
 import React, { useState, useEffect } from "react";
+import { v4 as uuidv4 } from "uuid";
+import { AnimatePresence } from "framer-motion";
+import toast from "react-hot-toast";
+
 import TodoTask from "../components/TodoTask";
 import ConfirmModal from "../components/ConfirmModal";
-import { AnimatePresence } from "framer-motion";
 
 interface TodoList {
+  id: string;
   taskName: string;
   isComplete: boolean;
 }
@@ -47,7 +51,7 @@ const TodoApp: React.FC = () => {
   };
 
   const handleAddTask = (): void => {
-    const newTask = { taskName: task, isComplete: false };
+    const newTask = { id: uuidv4(), taskName: task, isComplete: false };
     if (todoList.length !== 0) {
       const duplicateTask = todoList.find((item) => item.taskName === task);
       if (duplicateTask) {
@@ -56,16 +60,18 @@ const TodoApp: React.FC = () => {
         setTodoList([...todoList, newTask]);
         setPrevTodoList([...prevTodoList, newTask]);
         setTask("");
+        toast.success("Successfully created task!");
       }
     } else {
       setTodoList([...todoList, newTask]);
       setPrevTodoList([...prevTodoList, newTask]);
       setTask("");
+      toast.success("Successfully created task!");
     }
   };
 
   const isConfirmAdd = (confirm: boolean): void => {
-    const newTask = { taskName: task, isComplete: false };
+    const newTask = { id: uuidv4(), taskName: task, isComplete: false };
     if (confirm) {
       setTodoList([...todoList, newTask]);
       setPrevTodoList([...prevTodoList, newTask]);
@@ -77,21 +83,19 @@ const TodoApp: React.FC = () => {
     // show how many task was complete from all tasks
     setPrevTodoList(
       prevTodoList.filter((task) => {
-        return task.taskName !== taskNameComplete;
+        return task.id !== taskNameComplete;
       })
     );
     // check task was complete
     setTodoList((prevState) =>
       prevState.map((todo) =>
-        todo.taskName === taskNameComplete
-          ? { ...todo, isComplete: true }
-          : todo
+        todo.id === taskNameComplete ? { ...todo, isComplete: true } : todo
       )
     );
   };
 
   return (
-    <>
+    <React.Fragment>
       <div className="text-center my-6 text-[#EF4638] text-4xl font-extrabold">
         What's the Plan for Today?
       </div>
@@ -148,7 +152,7 @@ const TodoApp: React.FC = () => {
           />
         )}
       </AnimatePresence>
-    </>
+    </React.Fragment>
   );
 };
 

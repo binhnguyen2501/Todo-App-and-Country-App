@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 
 const HomePage: React.FC = () => {
   return (
-    <>
+    <React.Fragment>
       <div className="text-center my-6 text-[#EF4638] text-4xl font-extrabold">
         <div>Utility Applications</div>
       </div>
@@ -36,7 +36,7 @@ const HomePage: React.FC = () => {
           </Link>
         </motion.div>
       </div>
-    </>
+    </React.Fragment>
   );
 };
 

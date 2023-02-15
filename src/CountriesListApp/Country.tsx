@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 import { Link, useParams } from "react-router-dom";
-import GoogleMaps from "../components/GoogleMaps";
+import axios from "axios";
 import { motion } from "framer-motion";
+
+import GoogleMaps from "../components/GoogleMaps";
 
 interface CountryTypes {
   countryName: string;
