@@ -1,9 +1,11 @@
 import { motion } from "framer-motion";
-import Overlay from "./Overlay";
+import Overlay from "../Overlay";
 
 interface Props {
   closeModal(close: boolean): void;
   isConfirmAdd(confirm: boolean): void;
+  title: string;
+  content: string;
 }
 
 const dropIn = {
@@ -27,7 +29,7 @@ const dropIn = {
   },
 };
 
-const ConfirmModal = ({ closeModal, isConfirmAdd }: Props) => {
+const Modal = ({ closeModal, isConfirmAdd, title, content }: Props) => {
   const handleConfirm = (): void => {
     closeModal(false);
     isConfirmAdd(true);
@@ -44,7 +46,7 @@ const ConfirmModal = ({ closeModal, isConfirmAdd }: Props) => {
         exit="exit"
       >
         <div className="flex justify-between items-center">
-          <h4 className="text-lg font-bold">Confirm</h4>
+          <h4 className="text-lg font-bold">{title}</h4>
           <div onClick={() => closeModal(false)}>
             <svg
               className="h-6 w-6 cursor-pointer p-1 hover:bg-gray-300 rounded-full"
@@ -60,12 +62,7 @@ const ConfirmModal = ({ closeModal, isConfirmAdd }: Props) => {
             </svg>
           </div>
         </div>
-        <div className="mt-2 text-sm">
-          <p>
-            Are you sure you want to add this task because it is already in the
-            task list?
-          </p>
-        </div>
+        <div className="mt-2 text-sm">{content}</div>
         <div className="mt-3 flex justify-end space-x-3">
           <motion.button
             className="px-3 py-1 hover:text-red-600 rounded-lg"
@@ -81,7 +78,7 @@ const ConfirmModal = ({ closeModal, isConfirmAdd }: Props) => {
             whileHover={{ scale: 1.01 }}
             whileTap={{ scale: 0.99 }}
           >
-            Add
+            Submit
           </motion.button>
         </div>
       </motion.div>
@@ -89,4 +86,4 @@ const ConfirmModal = ({ closeModal, isConfirmAdd }: Props) => {
   );
 };
 
-export default ConfirmModal;
+export default Modal;

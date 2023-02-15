@@ -3,8 +3,8 @@ import { v4 as uuidv4 } from "uuid";
 import { AnimatePresence } from "framer-motion";
 import toast from "react-hot-toast";
 
-import TodoTask from "../components/TodoTask";
-import ConfirmModal from "../components/ConfirmModal";
+import TodoTask from "./TodoTask";
+import Modal from "../components/Modal";
 
 interface TodoList {
   id: string;
@@ -133,24 +133,40 @@ const TodoApp: React.FC = () => {
               value={task}
               placeholder="Task..."
               onChange={handleChange}
-              className="w-full text-lg lg:text-xl pl-6 py-3 border-0 rounded-lg focus:outline-none"
+              className="w-full text-lg lg:text-xl pl-6 py-3 border-0 rounded-lg focus:outline-none focus:bg-transparent active:bg-transparent bg-transparent"
             />
-            <button
-              disabled={!task}
-              onClick={handleAddTask}
-              className="w-40 cursor-pointer text-[#EF4638] text-lg lg:text-xl font-bold"
-            >
-              Add
-            </button>
+            <div className="flex items-center pr-6">
+              <button
+                disabled={!task}
+                onClick={handleAddTask}
+                className="w-max cursor-pointer text-[#EF4638] text-lg lg:text-xl font-bold"
+              >
+                Add
+              </button>
+            </div>
           </div>
         </div>
         <div className="mt-4">
-          <div className="text-center text-lg lg:text-2xl  mb-2 font-bold">
-            There are{" "}
-            <span className="text-[#EF4638]">{prevTodoList.length}</span> tasks
-            left out of {todoList.length} tasks
-          </div>
-          <ul className="list-disc px-4 flex flex-col gap-1 mt-1">
+          {todoList.length ? (
+            <div className="text-center text-lg lg:text-2xl mb-2 font-bold">
+              {prevTodoList.length === 0 ? (
+                <React.Fragment>There are no more tasks anymore</React.Fragment>
+              ) : (
+                <React.Fragment>
+                  There are {prevTodoList.length < 2 && "just"}{" "}
+                  <span className="text-[#EF4638]">{prevTodoList.length}</span>{" "}
+                  {prevTodoList.length < 2 ? "task" : "tasks"} left out of{" "}
+                  {todoList.length} tasks
+                </React.Fragment>
+              )}
+            </div>
+          ) : (
+            <div className="text-center text-lg lg:text-2xl mb-2 font-bold">
+              No tasks for today
+            </div>
+          )}
+
+          <div className="px-4 flex flex-col gap-1 mt-1">
             {todoList.map((task: TodoList, index: number) => {
               return (
                 <TodoTask
@@ -166,7 +182,7 @@ const TodoApp: React.FC = () => {
                 />
               );
             })}
-          </ul>
+          </div>
         </div>
       </div>
       <AnimatePresence
@@ -177,9 +193,11 @@ const TodoApp: React.FC = () => {
         exitBeforeEnter={true}
       >
         {openModalConfirm && (
-          <ConfirmModal
+          <Modal
             closeModal={setOpenModalConfirm}
             isConfirmAdd={isConfirmAdd}
+            title="Confirm"
+            content="Are you sure you want to add this task because it is already in the task list?"
           />
         )}
       </AnimatePresence>

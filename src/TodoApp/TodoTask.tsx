@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import toast from "react-hot-toast";
+import Icon from "../components/Icon";
 
 interface Props {
   task: {
@@ -44,25 +45,30 @@ const TodoTask = ({
           className="w-full border text-lg lg:text-xl pl-6 py-3 rounded-lg"
         />
       ) : (
-        <li
+        <div
           onClick={() => {
             completeTask(task.id);
             if (!task.isComplete) {
               toast.success(`Task ${task.taskName} was completed!`);
             }
           }}
-          className={`text-lg lg:text-2xl cursor-pointer w-max ${
-            task.isComplete ? "line-through" : ""
+          className={`text-lg lg:text-2xl cursor-pointer w-max flex items-center gap-3 ${
+            task.isComplete ? "text-red-500" : "text-black"
           }`}
         >
+          <Icon
+            icon={task.isComplete ? "tick-circle" : "add-circle"}
+            size={24}
+            color={task.isComplete ? "red" : "black"}
+          />
           {task.taskName}
-        </li>
+        </div>
       )}
 
       {selectedTaskEdit === task.id ? (
         <div className="flex items-center gap-3">
           <div
-            className="cursor-pointer hover:text-red-500 transition-all"
+            className="cursor-pointer font-medium hover:text-red-500 transition-all"
             onClick={() => {
               editTask(taskName);
             }}
@@ -70,7 +76,7 @@ const TodoTask = ({
             Edit
           </div>
           <div
-            className="cursor-pointer hover:text-red-500 transition-all"
+            className="cursor-pointer font-medium hover:text-red-500 transition-all"
             onClick={() => {
               handleSelectedTaskEdit("");
               setTaskName(task.taskName);
@@ -83,22 +89,22 @@ const TodoTask = ({
         <div className="flex items-center gap-3">
           {!task.isComplete && (
             <div
-              className="cursor-pointer hover:text-red-500 transition-all hidden group-hover:block"
+              className="cursor-pointer hidden group-hover:block"
               onClick={() => {
                 handleSelectedTaskEdit(task.id);
               }}
             >
-              Edit
+              <Icon icon="edit-2" size={24} color="black" />
             </div>
           )}
           <div
-            className="cursor-pointer hover:text-red-500 transition-all hidden group-hover:block"
+            className="cursor-pointer hidden group-hover:block"
             onClick={() => {
               deleteTask(task.id);
               toast.success(`Task ${task.taskName} was deleted!`);
             }}
           >
-            Delete
+            <Icon icon="trash" size={24} color="red" />
           </div>
         </div>
       )}

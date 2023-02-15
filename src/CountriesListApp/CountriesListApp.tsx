@@ -2,8 +2,6 @@ import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 
-import CountriesName from "../components/CountriesName";
-
 interface CountryListTypes {
   countryName: string;
   capital: string;
@@ -66,7 +64,6 @@ const CountriesListApp: React.FC = () => {
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
     const value = event.target.value;
-
     if (typingTimeoutRef.current) {
       clearTimeout(typingTimeoutRef.current);
     }
@@ -90,7 +87,7 @@ const CountriesListApp: React.FC = () => {
             <input
               type="text"
               name="search"
-              placeholder="Name..."
+              placeholder="Country name..."
               onChange={handleChange}
               className="w-full text-lg lg:text-xl pl-6 py-3 border-0 rounded-lg focus:outline-none"
             />
@@ -114,7 +111,9 @@ const CountriesListApp: React.FC = () => {
             !checkUserTyping &&
             countryList.map((country: CountryListTypes, index: number) => (
               <Link to={`/CountriesListApp/${country.capital}`} key={index}>
-                <CountriesName country={country} />
+                <div className="border-b-[0.5px] py-[15px] font-bold text-lg lg:text-xl">
+                  {country.countryName}
+                </div>
               </Link>
             ))}
         </div>
